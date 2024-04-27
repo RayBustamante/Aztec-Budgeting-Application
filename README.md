@@ -7,4 +7,4 @@ Using the inputs provided, this program will try to keep track of all user expen
 
 This program was created as a final project for my undergraduate program and it is meant to demonstrate my capabilities in using python, API's, Data Analysis, Pandas, matlibplot and Machine Learning Models. 
 
-To run, simply download the entire folder and  run the main.py file. 
+To run, simply download the entire folder and  run the main.py file. A local account would already have been made in order to bypass the account creation requirements and use the Expense Tracking Tool in the tools menu.

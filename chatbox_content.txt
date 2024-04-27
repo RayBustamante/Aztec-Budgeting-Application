@@ -1,0 +1,7 @@
+Welcome to Expense Tracker!
+Start entering your expenses below. 
+
+Log Date: 04/26/2024
+ * You have spent $5.50 on your ['Food'] expenses. 
+     User Input: 5.50 on food
+     Date: April 26, 10:55 PM

@@ -595,6 +595,8 @@ def chat_GPT(prompt):
     # tailored to the user's current expense rate.
     
     #Due to security reasons, I removed my API key and now it requires the user entry instead of a predefined key.
+
+    messagebox.showinfo("Alert", "Please enter the API key in the terminal")
     
     apiInput = str(input("Enter API key"))
     

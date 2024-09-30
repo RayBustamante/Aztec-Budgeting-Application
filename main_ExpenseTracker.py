@@ -112,6 +112,14 @@ def type_output(input_text2, chatboxExpense, index=0):
         chatboxExpense.yview_moveto(1.0)
         saveChatBoxToFile()
         
+def type_outputNoSave(input_text2, chatboxExpense, index=0):
+    # Outputs to chatboxx and make it type slowly like in chatGPT
+    if index < len(input_text2):
+        chatboxExpense.insert(tk.END, input_text2[index])
+        index += 1
+        chatboxExpense.after(20, type_output, input_text2, chatboxExpense, index)
+        chatboxExpense.yview_moveto(1.0)
+        
 def type_outputFaster(input_text2, chatboxExpense, index=0):
     # Outputs to chatboxx and make it type slowly like in chatGPT
     if index < len(input_text2):
@@ -609,7 +617,8 @@ def chat_GPT(prompt):
         return advice
     
     except:
-        messagebox.showerror("Error API request", "If you recieved this error, the API key provided is invalid. Please use a valid API key")
+        messagebox.showerror("Error API request", "If you recieved this error, the API key provided is invalid.")
+        return False
 
         
     
@@ -713,24 +722,24 @@ def analysize_Data():
     string = ""
     if average_value < currentSpent: #if the user expense is greater than the average
         aboveAverage = True
-        string = ("\n\nAnalysis Date: " + str(date_formatted) + "\n\nAnalysizing Data now... \n...\n...\n... \nTotal Entries of Students: 1000 entries \n\nHighest Expenses: " + str(highest_value)
+        string = ("\n\nAnalysis Date: " + str(date_formatted) + "\n-----------------\nTotal Entries of Students: 1000 entries \n\nHighest Expenses: " + str(highest_value)
                   + "\nLowest Expenses: " + str(lowest_value) + "\nAverage Expense: " + str(average_value)
                   + "\nExpense Category: " + str(currentCategory)
                   + "\n\nUser Monthly Income: " + str(monthlyIncome)
                   + "\nCurrent Expense : " + str(currentSpent)
                   + "\nStatus: Exceeds average by a difference of " + str(formatted_percentage)
-                  + "%\n\nRecommended Action: Save file and retrieve advice \n\nData analysis complete...")
+                  + "%\n\nData analysis complete...")
     elif average_value > currentSpent: #if the user expense is lower than the average
         aboveAverage = False
-        string = ("\n\nAnalysis Date: " + str(date_formatted) + "\n\nAnalysizing Data now... \n...\n...\n... \nTotal Entries of Students: 1000 entries \n\nHighest Expenses: " + str(highest_value)
+        string = ("\n\nAnalysis Date: " + str(date_formatted) + "\n-----------------\nTotal Entries of Students: 1000 entries \n\nHighest Expenses: " + str(highest_value)
                   + "\nLowest Expenses: " + str(lowest_value) + "\nAverage Expense: " + str(average_value)
                   + "\nExpense Category: " + str(currentCategory)
                   + "\n\nUser Monthly Income: " + str(monthlyIncome)
                   + "\nCurrent Expense : " + str(currentSpent)
                   + "\nStatus: Below average by a difference of " + str(formatted_percentage)
-                  + "%\n\nRecommended Action: Save file and retrieve advice \n\nData analysis complete...")
+                  + "%\n\nData analysis complete...")
         
-    type_output(string, chatboxExpense)
+    type_outputNoSave(string, chatboxExpense)
     
     save_File()
  
@@ -746,9 +755,9 @@ def save_File():
     # Include an option to add financial advice at the end of the doc. I made it an option cause
     # they are charging me for the service that I paid for (Ramon B.)
     if result:
+        
         result = messagebox.askyesno("Would you like A.I Advice?", "Would you like to include financial advices tailored to your current situation A.I at the end of your document? \nThis will require an user input of a valid API key in the terminal entry")
         if result:
-            
             #retrieve the text from chatbox
             chat_text = chatboxExpense.get("1.0", tk.END)
 
@@ -792,23 +801,49 @@ def save_File():
                 # call chatGPT and get some financial advice
                 financialAdvice = chat_GPT(prompt)
                 
-                #add into the document
-                expenseLimit = (str(expenseLimit) + "\nDate of Submission: " + str(date_formatted) + "\n\n---Expense Advice---")
-                doc.add_paragraph(expenseLimit)
-                doc.add_paragraph(financialAdvice)
-                
-                prompt = ("Also, with this amount of savings, should I consider investing my money or saving it? Don't mention my name when you write. Savings: " + str(savings) )                
-                # call chatGPT and get some financial advice
-                financialAdvice = chat_GPT(prompt)
-                
-                #add into the document
-                expenseLimit = ""
-                expenseLimit = (str(expenseLimit) + "\nDate of Submission: " + str(date_formatted) + "\n\n---Savings Advice---")
-                doc.add_paragraph(expenseLimit)
-                doc.add_paragraph(financialAdvice)                
-                
-                # Save the Word document to the chosen file location
-                doc.save(filepath)  
+                if financialAdvice == False:
+                    messagebox.showerror("Error", "Saving file without Financial advice.")
+                    #Save as plain if failed authentication
+                    chat_text = chatboxExpense.get("1.0", tk.END)
+
+                    date_formatted = current_datetime.strftime("%m-%d-%Y")
+                    
+                    initialFileName = "Aztec Budget Logfile " + str(date_formatted)
+                    # Ask the user to choose a file location for saving the Word document
+                    filepath = filedialog.asksaveasfilename(defaultextension=".docx", filetypes=[("Word Document", "*.docx")], initialfile=initialFileName)
+
+                    if filepath:
+                        doc = Document()
+                        
+                        # Add the text from the chatbox to the Word document
+                        doc.add_paragraph(chat_text)
+                        
+                        #add into the document
+                        expenseLimit = (str(expenseLimit) + "\nDate: " + str(date_formatted))
+                        doc.add_paragraph(expenseLimit)
+                        
+                        # Save the Word document to the chosen file location
+                        doc.save(filepath)
+                    
+                    
+                else:
+                    #add into the document
+                    expenseLimit = (str(expenseLimit) + "\nDate of Submission: " + str(date_formatted) + "\n\n---Expense Advice---")
+                    doc.add_paragraph(expenseLimit)
+                    doc.add_paragraph(financialAdvice)
+                    
+                    prompt = ("Also, with this amount of savings, should I consider investing my money or saving it? Don't mention my name when you write. Savings: " + str(savings) )                
+                    # call chatGPT and get some financial advice
+                    financialAdvice = chat_GPT(prompt)
+                    
+                    #add into the document
+                    expenseLimit = ""
+                    expenseLimit = (str(expenseLimit) + "\nDate of Submission: " + str(date_formatted) + "\n\n---Savings Advice---")
+                    doc.add_paragraph(expenseLimit)
+                    doc.add_paragraph(financialAdvice)                
+                    
+                    # Save the Word document to the chosen file location
+                    doc.save(filepath)  
         else:
             
             # Plain word document without the A.I Advice.

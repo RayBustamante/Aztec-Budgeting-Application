@@ -70,3 +70,15 @@ All within a fully functional **graphical interface**.
 2. Ensure all dependencies are installed:
    ```bash
    pip install pandas matplotlib scikit-learn openai
+
+bash
+Aztec-Budgeting-Application/
+│
+├── main.py                    # Entry point of the application
+├── data/
+│   └── user_data.csv          # Local user data file
+├── logs/
+│   └── budget_log.txt         # Saved expense chat log
+├── assets/                    # Optional folder for UI icons or images
+└── requirements.txt           # (Optional) Dependency list
+

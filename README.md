@@ -1,12 +1,72 @@
-# Aztec-Budgeting-Application
-by Ramon C. Bustamante
+# 🏛️ Aztec Budgeting Application
+**by Ramon C. Bustamante**
 
-This is a student Python application that keeps track of user expense and uses a data analystic API such as Pandas to compare the current dataset with those of other students and provide detailed and dynamic financial advice for their current situation. 
+A Python-based personal finance tool designed for students. It combines machine learning, data analysis, and an intuitive UI to help users understand and improve their spending habits—while comparing them to a broader dataset of peers.
 
-It requires the creation of a local student account which will ask for the students income, account information and monthly expenses with a fully functional user interface for inputs and menu selection. 
+> 🎓 Built as a final undergraduate project to showcase skills in Python, APIs, data science, and machine learning.
 
-Upon creation, the user may access the Tools Menu, which will contain the primary Expense Tracker program. The Expense Tracker interface will contain a chatbox which will contain an informative list of past and current expenses entered by the user. User inputs will be analyized based on which category of expenses the purchase best belongs to using a Support Vector Machine Model for categorical functions. Additionally, a budget log file containing the contents of a chatbox will be used to display the current purchases made to the user and will be saved to a local file that will be dynamically updated every time the user enters a new expense. Lastly, it will use Pandas to analyze the data provided with those of your peers and based on the comparison, will dynamically create a matlibplot graphical chart which shows the linear regression of the overall student body and your place within the graph. Upon completion of analysis, you may be able to save a document file containing all of your information along with financial advice dynamically tailored to your situation by the data provided by the user. The financial advice is created by using an API key from openAI.
+---
 
-This program was created as a final project for my undergraduate program and it is meant to demonstrate my capabilities in using python, API's, Data Analysis, Pandas, matlibplot and Machine Learning Models. 
+## 💼 Overview
 
-To run, simply download the entire folder and  run the main.py file. An account would already have been made, allowing for the use of the Expense Tracking Tool in the tools menu.
+The **Aztec Budgeting Application** is a smart budgeting assistant that:
+
+- Tracks personal income and expenses
+- Analyzes spending categories using a Support Vector Machine (SVM) model
+- Compares your financial data against a student peer dataset using **Pandas**
+- Generates visual insights with **Matplotlib**
+- Provides **dynamic, AI-generated financial advice** via the OpenAI API
+
+All within a fully functional **graphical interface**.
+
+---
+
+## 🧠 Key Features
+
+### ✅ Account Creation
+- Set up a local student profile
+- Input monthly income, account info, and fixed expenses
+- Data is saved locally and reused across sessions
+
+### 📊 Expense Tracker
+- Accessed through the **Tools Menu**
+- Includes:
+  - **Chatbox Interface** to log and review expenses
+  - **Automated Expense Categorization** using an SVM model
+  - **Budget Log**: Automatically saved and updated on every new entry
+
+### 📈 Data Analysis & Visualization
+- Uses **Pandas** to analyze your expenses relative to peer data
+- Dynamically generates a **Matplotlib regression chart**
+- Plots your financial position in comparison to other students
+
+### 🧾 Financial Advice
+- Upon analysis completion, generates tailored advice
+- Advice is created via OpenAI API based on your current spending trends
+- Saves a document summarizing:
+  - Income
+  - Expenses
+  - Spending breakdown
+  - Personalized financial recommendations
+
+---
+
+## ⚙️ Technologies Used
+
+| Library / API     | Purpose                               |
+|-------------------|---------------------------------------|
+| `pandas`          | Data analysis and comparison          |
+| `matplotlib`      | Graph creation and visualization      |
+| `sklearn` (SVM)   | Expense categorization (ML model)     |
+| `openai` API      | Dynamic financial advice generation   |
+| `tkinter`         | GUI for user input and tool menus     |
+| `os` / `csv`      | File handling and data persistence    |
+
+---
+
+## 🧪 How to Run
+
+1. **Download the full project folder**  
+2. Ensure all dependencies are installed:
+   ```bash
+   pip install pandas matplotlib scikit-learn openai

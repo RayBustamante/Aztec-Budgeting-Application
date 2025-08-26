@@ -69,6 +69,4 @@ All within a fully functional **graphical interface**.
 1. **Download the full project folder**  
 2. Ensure all dependencies are installed:
 3. Run main.py
-   ```bash
-   pip install pandas matplotlib scikit-learn openai
 

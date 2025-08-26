@@ -589,16 +589,11 @@ def record_Speech():
 
     start_Countdown(text_labelCountdown)
  
-def chat_GPT(prompt):
-    
+def chat_GPT(prompt): 
     # Create a prompt to send current expense expense data to chatGPT and retrieve viable financial advice
     # tailored to the user's current expense rate.
     
-    #Due to security reasons, I removed my API key and now it requires the user entry instead of a predefined key.
-
-    messagebox.showinfo("Alert", "Please enter the API key in the terminal")
-    
-    apiInput = str(input("Enter API key"))
+    apiInput = "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"
     
     try:
         OPENAI_API_KEY = apiInput
@@ -619,7 +614,7 @@ def chat_GPT(prompt):
         return advice
     
     except:
-        messagebox.showerror("Error API request", "If you recieved this error, the API key provided is invalid.")
+        messagebox.showerror("Error API request", "If you recieved this error, the API key provided is invalid or your API lacks funds to use OpenAI.")
         return False
 
         

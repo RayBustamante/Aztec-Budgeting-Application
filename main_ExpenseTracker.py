@@ -592,11 +592,12 @@ def record_Speech():
 def chat_GPT(prompt): 
     # Create a prompt to send current expense expense data to chatGPT and retrieve viable financial advice
     # tailored to the user's current expense rate.
+    # IF you need an API key for demoing purposes follow link and ask permission from Ramon Bustamante (me):   https://docs.google.com/document/d/136WD4eMBL3qw6p6ctXYpG952VvOXeimegbu3I_sj1Dc/edit?usp=sharing
     
-    apiInput = "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"
-    
+    user_inputAPI_Key = simpledialog.askstring("API Key Entry", "Please enter a valid OpenAI API Key. Contact m")
+      
     try:
-        OPENAI_API_KEY = apiInput
+        OPENAI_API_KEY = user_inputAPI_Key
         client = OpenAI(api_key=OPENAI_API_KEY)
         
         completion = client.chat.completions.create(
@@ -821,6 +822,7 @@ def save_File():
                         
                         # Save the Word document to the chosen file location
                         doc.save(filepath)
+                        messagebox.showinfo("Saved!", "File Saved!")
                     
                     
                 else:
@@ -830,8 +832,6 @@ def save_File():
                     doc.add_paragraph(financialAdvice)
                     
                     prompt = ("Also, with this amount of savings, should I consider investing my money or saving it? Don't mention my name when you write. Savings: " + str(savings) )                
-                    # call chatGPT and get some financial advice
-                    financialAdvice = chat_GPT(prompt)
                     
                     #add into the document
                     expenseLimit = ""
@@ -840,7 +840,8 @@ def save_File():
                     doc.add_paragraph(financialAdvice)                
                     
                     # Save the Word document to the chosen file location
-                    doc.save(filepath)  
+                    doc.save(filepath)
+                    messagebox.showinfo("Saved!", "AI Finance Advice Document Saved!")
         else:
             
             # Plain word document without the A.I Advice.
@@ -863,9 +864,11 @@ def save_File():
                 doc.add_paragraph(expenseLimit)
                 
                 # Save the Word document to the chosen file location
-                doc.save(filepath)  
+                doc.save(filepath)
+                messagebox.showinfo("Saved!", "File Saved!")
     else:
         return
+
 
 # Entries and Labels
 #-----------------------------------------------------------------

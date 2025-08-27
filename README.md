@@ -43,6 +43,7 @@ All within a fully functional **graphical interface**.
 ### 🧾 Financial Advice
 - Upon analysis completion, generates tailored advice
 - Advice is created via OpenAI API based on your current spending trends
+- Requires valid API Key. Ask permission through Ramon Bustamante (me) for a demo API key:   https://docs.google.com/document/d/136WD4eMBL3qw6p6ctXYpG952VvOXeimegbu3I_sj1Dc/edit?usp=sharing
 - Saves a document summarizing:
   - Income
   - Expenses

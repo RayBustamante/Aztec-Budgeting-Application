@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 import subprocess
 import sys
-from moviepy.editor import VideoFileClip
+from moviepy.video.io.VideoFileClip import VideoFileClip
 import os
 import csv
 import time

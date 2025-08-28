@@ -13,12 +13,15 @@ from numpy import False_
 
 # Video Loading Screen
 #-----------------------------------------------------------------
-# plays a short 3 second opening video showing our school logo. Due to recent updates with moviepy, I've disabled this until the bug is fixed.
-#video_path = "Loading_Screen.mp4" 
-#clip = VideoFileClip(video_path)
+# Plays an introduction video but if it dosent work, print error and skip.
+video_path = "Loading_Screen.mp4" 
+try:
+    clip = VideoFileClip(video_path)
+    clip.preview()  # Plays the video with sound
+    clip.close()
 
-#clip.preview()
-#clip.close()
+except Exception as e:
+    print(f"Error playing video: {e}")
 
 # GUI and Button Function
 #-----------------------------------------------------------------

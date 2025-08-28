@@ -13,15 +13,31 @@ from numpy import False_
 
 # Video Loading Screen
 #-----------------------------------------------------------------
-# Plays an introduction video but if it dosent work, print error and skip.
-video_path = "Loading_Screen.mp4" 
+# Plays an introduction video but if it dosent work, throw exception and skip.
 try:
-    clip = VideoFileClip(video_path)
-    clip.preview()  # Plays the video with sound
-    clip.close()
+    #assign videoSCreen with file name
+    videoScreen = cv2.VideoCapture("Loading_Screen.mp4")
+    
+    # prints error if file not found
+    if not videoScreen.isOpened():
+        raise IOError("Cannot open video file.")
+
+    # create the video window frame
+    while True:
+        ret, frame = videoScreen.read()
+        if not ret:
+            break
+        cv2.imshow("Loading Screen", frame)
+        
+        # waits and allows ot quit early
+        if cv2.waitKey(25) & 0xFF == ord('q'):
+            break
+    # plays video and destroy video when finished
+    videoScreen.release()
+    cv2.destroyAllWindows()
 
 except Exception as e:
-    print(f"Error playing video: {e}")
+    print("Error has occured!!:" + str(e))
 
 # GUI and Button Function
 #-----------------------------------------------------------------

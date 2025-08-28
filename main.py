@@ -2,18 +2,16 @@ import tkinter as tk
 from tkinter import messagebox
 import subprocess
 import sys
-from moviepy.video.io.VideoFileClip import VideoFileClip
 import os
 import csv
-import time
-import sys
+import cv2
 
 from numpy import False_
 
 
 # Video Loading Screen
 #-----------------------------------------------------------------
-# Plays an introduction video but if it dosent work, throw exception and skip.
+
 try:
     #assign videoSCreen with file name
     videoScreen = cv2.VideoCapture("Loading_Screen.mp4")
@@ -38,7 +36,6 @@ try:
 
 except Exception as e:
     print("Error has occured!!:" + str(e))
-
 # GUI and Button Function
 #-----------------------------------------------------------------
 string_Text = " "

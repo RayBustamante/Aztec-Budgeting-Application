@@ -13,11 +13,12 @@ from numpy import False_
 
 # Video Loading Screen
 #-----------------------------------------------------------------
-video_path = "Loading_Screen.mp4" 
-clip = VideoFileClip(video_path)
+# plays a short 3 second opening video showing our school logo. Due to recent updates with moviepy, I've disabled this until the bug is fixed.
+#video_path = "Loading_Screen.mp4" 
+#clip = VideoFileClip(video_path)
 
-clip.preview()
-clip.close()
+#clip.preview()
+#clip.close()
 
 # GUI and Button Function
 #-----------------------------------------------------------------
